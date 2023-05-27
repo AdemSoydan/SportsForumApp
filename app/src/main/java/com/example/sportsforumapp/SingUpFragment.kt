@@ -1,59 +1,81 @@
 package com.example.sportsforumapp
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import com.example.sportsforumapp.ApiUtils.ForumApiUtil
+import com.example.sportsforumapp.Models.User
+import com.example.sportsforumapp.SportsApi.SportsApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.http.HTTP
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SingUpFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SingUpFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var userNameText: TextView
+    lateinit var emailText: TextView
+    lateinit var passwordText: TextView
+    lateinit var signUpBtn: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sing_up, container, false)
+        val forumApiUtil = ForumApiUtil()
+        val retrofit = forumApiUtil.getRetrofit()
+        val view = inflater.inflate(R.layout.fragment_sing_up, container, false)
+
+        userNameText = view!!.findViewById(R.id.userNameText)
+        emailText = view.findViewById(R.id.emailText)
+        passwordText = view.findViewById(R.id.passwordText)
+        signUpBtn = view.findViewById(R.id.signUpButton)
+
+        val apiService = retrofit.create(SportsApiService::class.java)
+
+
+        signUpBtn.setOnClickListener {
+            val email : String = emailText.text.toString()
+            val password : String = emailText.text.toString()
+            if(userNameText.text== null)
+                Toast.makeText(context, "Bu Email Zaten Kullnımda", Toast.LENGTH_SHORT).show()
+
+            val user = User(userNameText.text.toString() as String?,email,
+                password
+            )
+            var call : Call<User> = apiService.postUser(user);
+            call.enqueue(object: Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    // başarılı bir şekilde cevap aldıysak
+                    if(response.code() == 200){
+                        Toast.makeText(context, "Kullanıcı Oluşturuldu", Toast.LENGTH_SHORT).show()
+
+                    }
+                    else if(response.code() == 409){
+                        Toast.makeText(context, "Kullanıcı Böyle bir kullanıcı zaten var", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Log.e("API","REQUEST FAIL")
+                    }
+
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+
+                    Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
+                }
+
+            })
+
+        }
+        return view
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SingUpFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SingUpFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
