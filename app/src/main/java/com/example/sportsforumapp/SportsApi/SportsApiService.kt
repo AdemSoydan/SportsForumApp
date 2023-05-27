@@ -12,7 +12,7 @@ interface SportsApiService {
     @POST("/user")
     fun postUser(@Body userData : User) : Call<User>
 
-    @GET("/user")
-    fun getUser() : Call<User>
+    @POST("/userlogin")
+    fun getUser(@Body userData : User) : Call<User>
 
 }

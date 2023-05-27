@@ -42,7 +42,7 @@ class SingUpFragment : Fragment() {
 
         signUpBtn.setOnClickListener {
             val email : String = emailText.text.toString()
-            val password : String = emailText.text.toString()
+            val password : String = passwordText.text.toString()
             if(userNameText.text== null)
                 Toast.makeText(context, "Bu Email Zaten Kullnımda", Toast.LENGTH_SHORT).show()
 
@@ -55,10 +55,10 @@ class SingUpFragment : Fragment() {
                     // başarılı bir şekilde cevap aldıysak
                     if(response.code() == 200){
                         Toast.makeText(context, "Kullanıcı Oluşturuldu", Toast.LENGTH_SHORT).show()
-
+                        (activity as MainActivity).replaceFragment(SignInFragment())
                     }
                     else if(response.code() == 409){
-                        Toast.makeText(context, "Kullanıcı Böyle bir kullanıcı zaten var", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Böyle bir kullanıcı zaten var", Toast.LENGTH_SHORT).show()
                     }
                     else{
                         Log.e("API","REQUEST FAIL")
