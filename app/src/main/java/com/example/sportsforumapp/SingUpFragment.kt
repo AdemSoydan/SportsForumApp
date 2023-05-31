@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.example.sportsforumapp.ApiUtils.ForumApiUtil
 import com.example.sportsforumapp.Models.User
 import com.example.sportsforumapp.SportsApi.SportsApiService
+import com.example.sportsforumapp.TitleFragment.TitleFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,9 +47,7 @@ class SingUpFragment : Fragment() {
             if(userNameText.text== null)
                 Toast.makeText(context, "Bu Email Zaten Kullnımda", Toast.LENGTH_SHORT).show()
 
-            val user = User(userNameText.text.toString() as String?,email,
-                password
-            )
+            val user = User(0,userNameText.text.toString() as String?,email,password,null)
             var call : Call<User> = apiService.postUser(user);
             call.enqueue(object: Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {

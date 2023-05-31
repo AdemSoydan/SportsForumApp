@@ -1,5 +1,6 @@
 package com.example.sportsforumapp.SportsApi
 
+import com.example.sportsforumapp.Models.Entry
 import com.example.sportsforumapp.Models.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,5 +15,8 @@ interface SportsApiService {
 
     @POST("/userlogin")
     fun getUser(@Body userData : User) : Call<User>
+
+    @POST("/entry")
+    fun saveEntry(@Body entry : Entry) : Call<Entry>
 
 }

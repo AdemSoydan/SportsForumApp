@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.sportsforumapp.TitleFragment.TitleFragment
 import com.example.sportsforumapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

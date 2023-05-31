@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.sportsforumapp.ApiUtils.ForumApiUtil
 import com.example.sportsforumapp.Models.User
 import com.example.sportsforumapp.SportsApi.SportsApiService
+import com.example.sportsforumapp.TitleFragment.TitleFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +39,7 @@ class SignInFragment : Fragment() {
         signInBtn.setOnClickListener {
             val password : String = passwordText.text.toString()
             val username : String = userNameText.text.toString()
-            val user : User = User(username, "", password)
+            val user : User = User(0,username, "", password, null)
             var call : Call<User> = apiService.getUser(user);
             call.enqueue(object: Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -46,10 +47,11 @@ class SignInFragment : Fragment() {
                     val responseCode : String = response.code().toString()
                     Toast.makeText(context, responseCode, Toast.LENGTH_LONG).show()
                     if(response.code() == 200){
-                        Toast.makeText(context, "Giris Basarili", Toast.LENGTH_LONG).show()
-                        (activity as MainActivity).replaceFragment(SingUpFragment())
+
+                        UserObject.setUser(response.body()!!)
+                        (activity as MainActivity).replaceFragment(TitleFragment())
                     }
-                    else if(response.code() == 404){
+                    else if(response.code() == 409){
                         Toast.makeText(context, "Kullanıcı Adı Veya Şifre Yanlış", Toast.LENGTH_SHORT).show()
                     }
                     else{
