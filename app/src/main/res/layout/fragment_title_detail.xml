@@ -7,18 +7,18 @@
     tools:context=".TitleDetailFragment.titleDetailFragment"
 
 
-
-
-
     >
 
     <TextView
         android:id="@+id/titleTitleText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="382dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

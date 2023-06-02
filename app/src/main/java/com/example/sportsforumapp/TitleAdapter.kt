@@ -18,7 +18,6 @@ class TitleAdapter(var onTitleClickListener: TitleClickListener) : RecyclerView.
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = TitleItemViewBinding.inflate(layoutInflater, parent, false)
         return GameViewHolder(binding)
-
     }
     // sets the text and other viewed stuff initially
     @SuppressLint("SetTextI18n")
@@ -28,10 +27,12 @@ class TitleAdapter(var onTitleClickListener: TitleClickListener) : RecyclerView.
             entryNumberText.text = titles[position].numberOfEntries.toString()
         }
         holder.itemView.setOnClickListener (
+
             object : View.OnClickListener {
                 override fun onClick(v: View?) {
                    val mLastPosition = holder.bindingAdapterPosition
                     onTitleClickListener.onTitleClickListener(titles[mLastPosition].titleId)
+
                 }
             })
 

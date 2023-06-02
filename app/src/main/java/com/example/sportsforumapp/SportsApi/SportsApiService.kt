@@ -19,4 +19,9 @@ interface SportsApiService {
     @POST("/entry")
     fun saveEntry(@Body entry : Entry) : Call<Entry>
 
+    @GET("/likeentry/{id}")
+    fun likeEntry(@Path("id") id : Int) : Call<Int>
+
+    @GET("/unlikeentry/{id}")
+    fun unlikeEntry(@Path("id") id : Int) : Call<Int>
 }
