@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsforumapp.Models.TitleResponse
 import com.example.sportsforumapp.databinding.TitleItemViewBinding
 
-class TitleAdapter () : RecyclerView.Adapter<TitleAdapter.GameViewHolder>()
+class TitleAdapter(var onTitleClickListener: TitleClickListener) : RecyclerView.Adapter<TitleAdapter.GameViewHolder>()
 {
     var titles =  ArrayList<TitleResponse>()
     inner class GameViewHolder(val binding: TitleItemViewBinding) : RecyclerView.ViewHolder(binding.root)
@@ -27,6 +27,14 @@ class TitleAdapter () : RecyclerView.Adapter<TitleAdapter.GameViewHolder>()
             titleNameText.text = titles[position].titleName
             entryNumberText.text = titles[position].numberOfEntries.toString()
         }
+        holder.itemView.setOnClickListener (
+            object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                   val mLastPosition = holder.bindingAdapterPosition
+                    onTitleClickListener.onTitleClickListener(titles[mLastPosition].titleId)
+                }
+            })
+
     }
 
     fun addTitle(newTitles : List<TitleResponse>){

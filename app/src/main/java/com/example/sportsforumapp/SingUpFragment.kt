@@ -62,11 +62,8 @@ class SingUpFragment : Fragment() {
                     else{
                         Log.e("API","REQUEST FAIL")
                     }
-
                 }
-
                 override fun onFailure(call: Call<User>, t: Throwable) {
-
                     Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
                 }
 

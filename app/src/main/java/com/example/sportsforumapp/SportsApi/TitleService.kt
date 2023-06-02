@@ -7,6 +7,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface TitleService {
     @GET("/title")
@@ -17,4 +18,7 @@ interface TitleService {
 
     @POST("/titlesave")
     fun saveTitleWithRequest(@Body title : TitleSaveRequest) : Call<Title>
+
+    @GET("/titles/{id}")
+    fun getTitleById(@Path("id") id : Int) : Call<Title>
 }

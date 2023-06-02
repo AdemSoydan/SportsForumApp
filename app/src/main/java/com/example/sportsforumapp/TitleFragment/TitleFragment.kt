@@ -12,18 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsforumapp.ApiUtils.ForumApiUtil
 import com.example.sportsforumapp.MainActivity
+import com.example.sportsforumapp.Models.Title
 import com.example.sportsforumapp.Models.TitleResponse
-import com.example.sportsforumapp.Models.User
 import com.example.sportsforumapp.R
 import com.example.sportsforumapp.SportsApi.TitleService
 import com.example.sportsforumapp.TitleAdapter
-import com.example.sportsforumapp.UserObject
+import com.example.sportsforumapp.TitleClickListener
+import com.example.sportsforumapp.TitleDetailFragment.titleDetailFragment
+import com.example.sportsforumapp.TitleObject
 import com.example.sportsforumapp.addTitleFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TitleFragment : Fragment() {
+class TitleFragment : Fragment() , TitleClickListener {
 
     lateinit var rvTitles : RecyclerView
     lateinit var titleAdapter: TitleAdapter
@@ -45,6 +47,9 @@ class TitleFragment : Fragment() {
                 if(response.code() == 200){
                     Log.e("API","200 GELDI")
                     val result = response.body()!!
+                    for(t in result){
+                        Log.e("TITLE",t.titleId.toString())
+                    }
                     val reversed = result.reversed()
                     titleAdapter.addTitle(reversed)
                 }
@@ -70,10 +75,38 @@ class TitleFragment : Fragment() {
     private fun setRvAndAdapter(view: View){
         addTitlebBtn = view.findViewById(R.id.addTitleBtn)
         rvTitles = view.findViewById(R.id.titleRv)
-        titleAdapter = TitleAdapter()
+        titleAdapter = TitleAdapter(this)
         rvTitles.setHasFixedSize(true)
         rvTitles.setLayoutManager(LinearLayoutManager(context));
         rvTitles.adapter = titleAdapter
+    }
+
+    override fun onTitleClickListener(titleId: Int?) {
+        val forumApiUtil = ForumApiUtil()
+        val retrofit = forumApiUtil.getRetrofit()
+        val apiService = retrofit.create(TitleService::class.java)
+
+        titleId?.let { apiService.getTitleById(titleId) }?.enqueue(object : Callback<Title> {
+            override fun onResponse(call: Call<Title>, response: Response<Title>) {
+                Log.e("API", "METHODA GIRDI")
+                if (response.code() == 200) {
+                    Log.e("API", "200 GELDI")
+                    val title = response.body()
+                    TitleObject.setTitle(title as Title)
+                    (activity as MainActivity).replaceFragment(titleDetailFragment())
+                } else if (response.code() == 404) {
+                    Toast.makeText(context, "Kullanıcı Adı Veya Şifre Yanlış", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Log.e("API", "REQUEST FAIL")
+                }
+            }
+
+            override fun onFailure(call: Call<Title>, t: Throwable) {
+
+                Log.e("API", "API MI CALISMIYO NOLUYO ABI YA")
+            }
+        })
     }
 
 

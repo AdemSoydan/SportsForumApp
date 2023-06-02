@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <TextView
+        android:id="@+id/entryViewEntryText"
+        android:layout_width="401dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/entryViewUsernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="adem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entryViewEntryText"
+        app:layout_constraintVertical_bias="0.567" />
+
+    <Button
+        android:id="@+id/likebutton"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="24dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
+        android:text="Button"
+        app:icon="@android:drawable/btn_star_big_on"
+        app:iconGravity="textStart"
+        app:iconTint="#E61332"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entryViewEntryText"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/noOfLikedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/likebutton"
+        app:layout_constraintTop_toBottomOf="@+id/entryViewEntryText"
+        app:layout_constraintVertical_bias="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
