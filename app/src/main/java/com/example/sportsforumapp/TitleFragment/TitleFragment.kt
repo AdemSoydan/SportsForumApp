@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsforumapp.ApiUtils.ForumApiUtil
@@ -15,6 +16,7 @@ import com.example.sportsforumapp.MainActivity
 import com.example.sportsforumapp.Models.Title
 import com.example.sportsforumapp.Models.TitleResponse
 import com.example.sportsforumapp.R
+import com.example.sportsforumapp.SignInFragment
 import com.example.sportsforumapp.SportsApi.TitleService
 import com.example.sportsforumapp.TitleAdapter
 import com.example.sportsforumapp.TitleClickListener
@@ -68,6 +70,7 @@ class TitleFragment : Fragment() , TitleClickListener {
         addTitlebBtn.setOnClickListener {
             (activity as MainActivity).replaceFragment(addTitleFragment())
         }
+        setOnBackPressed()
 
         return view;
     }
@@ -79,6 +82,14 @@ class TitleFragment : Fragment() , TitleClickListener {
         rvTitles.setHasFixedSize(true)
         rvTitles.setLayoutManager(LinearLayoutManager(context));
         rvTitles.adapter = titleAdapter
+    }
+    private fun setOnBackPressed(){
+        val callback = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                (activity as MainActivity).replaceFragment(SignInFragment())
+            }
+        }
+        (activity as MainActivity).onBackPressedDispatcher.addCallback(callback)
     }
 
     override fun onTitleClickListener(titleId: Int?) {

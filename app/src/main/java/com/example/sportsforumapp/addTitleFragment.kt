@@ -33,9 +33,6 @@ class addTitleFragment : Fragment() {
         titleText = view.findViewById(R.id.titleNameText)
         entryText = view.findViewById(R.id.entryText)
         addTitleBtn = view.findViewById(R.id.addTitleAndEntryBtn)
-
-
-
         val forumApiUtil = ForumApiUtil()
         val retrofit = forumApiUtil.getRetrofit()
         val apiService = retrofit.create(TitleService::class.java)

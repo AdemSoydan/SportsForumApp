@@ -10,7 +10,7 @@
         android:layout_height="2dp"
         android:background="#DAD8D8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entryViewEntryText" />
+        app:layout_constraintTop_toBottomOf="@+id/likebutton" />
 
     <TextView
         android:id="@+id/entryViewEntryText"
@@ -29,6 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="adem"
+        android:textColor="#139F18"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entryViewEntryText"
@@ -54,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/likebutton"
         app:layout_constraintTop_toBottomOf="@+id/entryViewEntryText"

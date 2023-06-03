@@ -4,7 +4,6 @@ import com.example.sportsforumapp.Models.User
 
 object UserObject {
     private lateinit var user : User
-
     fun setUser(user1 : User){
         user = user1
     }

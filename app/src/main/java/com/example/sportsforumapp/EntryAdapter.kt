@@ -3,19 +3,12 @@ package com.example.sportsforumapp
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsforumapp.ApiUtils.ForumApiUtil
 import com.example.sportsforumapp.Models.Entry
-import com.example.sportsforumapp.Models.TitleResponse
-import com.example.sportsforumapp.Models.User
 import com.example.sportsforumapp.SportsApi.SportsApiService
-import com.example.sportsforumapp.SportsApi.TitleService
 import com.example.sportsforumapp.databinding.EntryItemViewBinding
-import com.example.sportsforumapp.databinding.TitleItemViewBinding
 import com.google.android.material.button.MaterialButton
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,11 +81,15 @@ class EntryAdapter  : RecyclerView.Adapter<EntryAdapter.EntryViewHolder>() {
         }
     }
 
-    fun addEntry(newTitles : List<Entry>){
+    fun addAllEntries(newTitles : List<Entry>){
         entries.addAll(newTitles)
         notifyDataSetChanged()
     }
 
+    fun addEntry(entry: Entry){
+        entries.add(entry)
+        notifyDataSetChanged()
+    }
     // how many items we have currently in recyclerview,
     override fun getItemCount(): Int {
         return entries.size
