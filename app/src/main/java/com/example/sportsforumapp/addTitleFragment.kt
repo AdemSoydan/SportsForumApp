@@ -46,21 +46,20 @@ class addTitleFragment : Fragment() {
             call.enqueue(object: Callback<Title> {
                 override fun onResponse(call: Call<Title>, response: Response<Title>) {
                     if(response.code() == 200){
-                        Toast.makeText(context, "Oldu", Toast.LENGTH_SHORT).show()
                         (activity as MainActivity).replaceFragment(TitleFragment())
                     }
                     else if(response.code() == 409){
                         Toast.makeText(context, "Kullanıcı Adı Veya Şifre Yanlış", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        Log.e("API","REQUEST FAIL")
+                        Log.e("API","-")
                     }
 
                 }
 
                 override fun onFailure(call: Call<Title>, t: Throwable) {
 
-                    Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
+                    Log.e("API","-")
                 }
 
             })

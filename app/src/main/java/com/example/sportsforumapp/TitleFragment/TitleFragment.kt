@@ -64,7 +64,7 @@ class TitleFragment : Fragment() , TitleClickListener {
             }
             override fun onFailure(call: Call<List<TitleResponse>>, t: Throwable) {
 
-                Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
+                Log.e("API","-")
             }
         })
         addTitlebBtn.setOnClickListener {

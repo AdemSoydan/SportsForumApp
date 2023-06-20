@@ -92,12 +92,12 @@ class titleDetailFragment : Fragment() {
                         Toast.makeText(context, "Entry Eklendi", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        Log.e("API","REQUEST FAIL")
+                        Log.e("API","-")
                     }
                 }
                 override fun onFailure(call: Call<Entry>, t: Throwable) {
 
-                    Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
+                    Log.e("API","-")
                 }
 
             })

@@ -52,7 +52,7 @@ class EntryAdapter  : RecyclerView.Adapter<EntryAdapter.EntryViewHolder>() {
                             }
                         }
                         override fun onFailure(call: Call<Int>, t: Throwable) {
-                            Log.e("RESPONSE CODE : ","API MI CALISMIYO NOLUYO ABI YA")
+                            Log.e("- ","-")
                         }
 
                     })
@@ -72,7 +72,7 @@ class EntryAdapter  : RecyclerView.Adapter<EntryAdapter.EntryViewHolder>() {
                             }
                         }
                         override fun onFailure(call: Call<Int>, t: Throwable) {
-                            Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
+                            Log.e("API","-")
                         }
 
                     })

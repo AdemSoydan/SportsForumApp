@@ -62,7 +62,7 @@ class SignInFragment : Fragment() {
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
 
-                    Log.e("API","API MI CALISMIYO NOLUYO ABI YA")
+                    Log.e("API","-")
                 }
 
             })
